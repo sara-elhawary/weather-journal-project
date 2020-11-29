@@ -3,9 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Server</title>
+    <link rel="icon" href="https://img.icons8.com/doodle/48/000000/summer.png"/>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Weather Journal</title>
   </head>
   <body>
-    <script src="./index.js"></script>
+<div class="container">
+  <h1>Weather Journal</h1>
+  <div id="weather-form">
+  <input required type="text" id="zip" placeholder="Enter City Zip Code">
+ <button id="generate">Generate</button>
+ <div id="feelings-div">
+   <label id="feelings-label" for="feelings" placeholder="Please enter your feelings">Your Feelings</label>
+ <textarea  id="feelings" cols="30" rows="3"></textarea>
+</div>
+</div>
+<div id="data"></div>
+  <div id="entryHolder">
+    <div id="date">
+      <h2 div="date_h2"></h2>
+    </div>
+    <div id="temp">
+      <h2 div="temp_h2"></h2>
+    </div>
+    <div id="content">
+      <h2 div="content_h2"></h2>
+    </div>
+    </div>
+
+</div>
+    <script src="./client.js></script>
   </body>
 </html>
