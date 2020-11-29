@@ -1,3 +1,4 @@
+const projectData = {}
 //INSTALLING EXPRESS,CORS,BODY-PARSER
 const express = require('express')
 const app = express()
@@ -14,6 +15,19 @@ app.use(express.static('public'))
 const port = 8000
 const server = app.listen(port, () => console.log(`local host on port:${port}`))
 
-app.get('/', function (req, res) {
-  res.send('Hello world')
-})
+app.get('/allData', sendData)
+
+function sendData(req, res) {
+  res.send(projectData)
+}
+
+app.post('/addData', addData)
+
+function addData(req, res) {
+  let data = req.body
+  projectData['date'] = data.date
+  projectData['temp'] = data.temp
+  projectData['feelings'] = data.feelings
+
+  res.send(projectData)
+}
