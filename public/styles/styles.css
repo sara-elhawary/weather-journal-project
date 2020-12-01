@@ -26,7 +26,7 @@ h1 {
   margin-top: 50px;
   /* border: white solid 1px; */
 }
-#zip {
+input {
   border: none;
   border-bottom: solid 2px #97cecc;
   background-color: #12908e;
@@ -34,10 +34,10 @@ h1 {
   margin-right: 30px;
   caret-color: white;
 }
-#zip:focus {
+input:focus {
   outline: none;
 }
-#zip::placeholder {
+input::placeholder {
   color: white;
   font-size: 1rem;
   font-weight: 700;
