@@ -25,24 +25,40 @@ form.addEventListener('submit', (e) => {
         .then((response) => response.json())
         .then((response) => {
           console.log(response)
-          document.querySelector('.result__zip').innerHTML = response.zip
-          document.querySelector('.result__feeling').innerHTML =
-            response.feeling
-          document.querySelector('.result__temp').innerHTML = response.temp
-          document.querySelector('.result__date').innerHTML = response.date
-          document.querySelector(
-            '.result__location'
-          ).innerHTML = `${response.city},${response.country}`
-
-          document
-            .querySelector('.result__weather-state')
-            .setAttribute(
-              'src',
-              `http://openweathermap.org/img/wn/${response.icon}@2x.png`
-            )
-          result.style.display = 'block'
-          form.style.display = 'none'
+          getResult(response)
+          updateUI()
         })
     })
     .catch((error) => console.log(error))
 })
+
+function getResult(response) {
+  document.querySelector('.result__zip').innerHTML = `Zip:${response.zip}`
+  document.querySelector(
+    '.result__feeling'
+  ).innerHTML = `Feeling:${response.feeling}`
+
+  document.querySelector('.result__temp').innerHTML = `Temperature:${Math.floor(
+    response.temp
+  )} C
+  `
+  document.querySelector('.result__date').innerHTML = `Today:${new Date(
+    response.date
+  ).toDateString()}`
+  document.querySelector('.result__desc').innerHTML = response.description
+  document.querySelector(
+    '.result__location'
+  ).innerHTML = `Location:${response.city},${response.country}`
+
+  document
+    .querySelector('.result__weather-state')
+    .setAttribute(
+      'src',
+      `http://openweathermap.org/img/wn/${response.icon}@2x.png`
+    )
+}
+
+function updateUI() {
+  result.style.display = 'flex'
+  form.style.display = 'none'
+}

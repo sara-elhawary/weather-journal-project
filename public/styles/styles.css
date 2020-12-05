@@ -6,9 +6,8 @@
 }
 body {
   /* background-color: #12908e; */
-  background-color: #60dfcd;
-  background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
-
+  background-color: #7fcec5;
+  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
   font-family: 'Ubuntu Mono', monospace;
   color: white;
   font-size: 16px;
@@ -101,17 +100,20 @@ input[type='number'] {
 ***************************************/
 .result {
   margin-top: 60px;
-  background-color: white;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #1e9afe;
+  color: white;
   display: flex;
-  display: column;
+  flex-direction: column;
   align-items: center;
 }
 .result > * {
   margin-top: 10px;
+}
+.result__weather-state {
+  filter: brightness(3.7);
+  width: 200px;
 }
 /* .result__zip {
 }
