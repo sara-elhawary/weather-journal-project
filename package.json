@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5"
+    "isomorphic-fetch": "^3.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
   "scripts": {
     "run": "node index.html",
     "start": "node server.js"
