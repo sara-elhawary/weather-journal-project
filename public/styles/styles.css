@@ -5,77 +5,119 @@
   padding: 0;
 }
 body {
-  background-color: #12908e;
+  /* background-color: #12908e; */
+  background-color: #60dfcd;
+  background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
+
   font-family: 'Ubuntu Mono', monospace;
   color: white;
   font-size: 16px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .container {
   width: 60%;
   margin: 50px auto;
+  padding-top: 20px;
   text-align: center;
   /* border: white solid 1px; */
 }
 h1 {
   font-size: 4rem;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 /***************************************
                FORM
 ***************************************/
-#weather-form {
-  margin-top: 50px;
+.form {
+  margin: 60px auto 0;
+  width: 60%;
   /* border: white solid 1px; */
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
 }
-input {
+.form__zip,
+.form__feeling {
   border: none;
-  border-bottom: solid 2px #97cecc;
-  background-color: #12908e;
-  padding: 5px 15px 4px 4px;
+  border-bottom: solid 2px white;
+  background-color: transparent;
+  padding: 10px 15px 10px 10px;
   margin-right: 30px;
+  margin-bottom: 30px;
   caret-color: white;
+  color: white;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
 }
-input:focus {
+.form__feeling {
+  resize: none;
+}
+.form__zip,
+.form__feeling:focus {
   outline: none;
 }
-input::placeholder {
+.form__zip::placeholder,
+.form__feeling::placeholder {
   color: white;
   font-size: 1rem;
   font-weight: 700;
 }
-#generate {
-  background-color: #c4421a;
+.form__submit {
+  background-color: #d86d4e;
   color: white;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
-  padding: 8px 5px;
+  padding: 12px 12px;
   border-radius: 4px;
+  margin-top: 30px;
 }
-#feelings-div {
-  /* border: white solid 2px; */
-  width: 50%;
-  margin: 20px auto;
-  margin-right: 150px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.form__submit:hover {
+  cursor: pointer;
+  /* opacity: 0.75; */
+  background-color: #ff5959;
 }
-#feelings-label {
-  font-size: 1.2rem;
-  margin-right: 18px;
-  font-weight: 700;
-}
-#feelings {
-  padding: 3px 6px;
-  border: none;
-  border-radius: 4px;
-}
-#feelings:focus {
+.form__submit:focus {
   outline: none !important;
 }
+
 /***************************************
-               ENTRY HOLDER
+               RESULT
 ***************************************/
-#entryHolder {
-  /* border: red solid 1px; */
+.result {
+  margin-top: 60px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e9afe;
+  display: flex;
+  display: column;
+  align-items: center;
 }
+.result > * {
+  margin-top: 10px;
+}
+/* .result__zip {
+}
+.result__feeling {
+}
+.result__temp {
+}
+.result__date {
+}  */
