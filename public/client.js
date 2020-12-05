@@ -1,58 +1,48 @@
-const generateBtn = document.getElementById('generate')
+const generateBtn = document.querySelector('.form__submit')
+const form = document.querySelector('.form')
+const zip = document.querySelector('.form__zip')
+const feeling = document.querySelector('.form__feeling')
+const result = document.querySelector('.result')
 
-const date = document.getElementById('date_h2')
-const temp = document.getElementById('temp_h2')
-const content = document.getElementById('content_h2')
+result.style.display = 'none'
 
-const zipCode = document.getElementById('zip').value
-// const countryCode = document.getElementById('country').value
-const apiKey = '12753cdcb473140f8d97e3bb1529014e'
-const url = `api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`
-
-console.log('hello')
-//EVENT LISTENER FOR GENERATE BTN
-generateBtn.addEventListener('click', performAction())
-
-function performAction() {
-  console.log(zipCode)
-  fetch(url).then(function (response) {
-    let data = response.json()
-    console.log(data)
+form.addEventListener('submit', (e) => {
+  const body = { zip: zip.value, feeling: feeling.value }
+  console.log({ body })
+  e.preventDefault()
+  fetch('/postData', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(body),
   })
-}
-// function performAction(e) {
-//   e.preventDefault()
-//   const content = document.getElementById('feelings').textContent
-//   getData(url, zipCode, apiKey)
-//     .then(function (data) {
-//       postData('/addData', {
-//         date: data.date,
-//         temp: data.temp,
-//         content: content,
-//       })
-//     })
-//     .then(updateUI())
-// }
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response)
+      fetch('/updateData')
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response)
+          document.querySelector('.result__zip').innerHTML = response.zip
+          document.querySelector('.result__feeling').innerHTML =
+            response.feeling
+          document.querySelector('.result__temp').innerHTML = response.temp
+          document.querySelector('.result__date').innerHTML = response.date
+          document.querySelector(
+            '.result__location'
+          ).innerHTML = `${response.city},${response.country}`
 
-// const getData = async (url, zipCode, apiKey) => {
-//   const res = await fetch(url + zipCode + apiKey)
-//   try {
-//     const data = await res.json()
-//     console.log(data)
-//     return data
-//   } catch (error) {
-//     console.log('error', error)
-//   }
-// }
-
-// const updateUI = async () => {
-//   const request = await fetch('/all')
-//   try {
-//     const Data = await request.json()
-//     date.innerHTML = Data[0].date
-//     temp.innerHTML = Data[0].temp
-//     content.innerHTML = Data[0].content
-//   } catch (error) {
-//     console.log('error', error)
-//   }
-// }
+          document
+            .querySelector('.result__weather-state')
+            .setAttribute(
+              'src',
+              `http://openweathermap.org/img/wn/${response.icon}@2x.png`
+            )
+          result.style.display = 'block'
+          form.style.display = 'none'
+        })
+    })
+    .catch((error) => console.log(error))
+})
