@@ -1,33 +1,50 @@
-const projectData = {}
-//INSTALLING EXPRESS,CORS,BODY-PARSER
 const express = require('express')
-const app = express()
 const cors = require('cors')
-const bodyParser = require('body-parser')
+const fetch = require('isomorphic-fetch')
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
-//EXPRESS APP POINTING TO .html,.css,.js FILES
 app.use(express.static('public'))
-//LOCAL SERVER RUNNING AND PRODUCING FEEDBACK TO COMMAND LINE
-const port = 8000
-const server = app.listen(port, () => console.log(`local host on port:${port}`))
 
-app.get('/allData', sendData)
+let projectData = {}
 
-function sendData(req, res) {
+app.post('/postData', postData)
+
+function postData(req, res) {
+  let { zip, feeling } = req.body
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=491b3d0e20d1888d860346513fc7011f`
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((response) => {
+      console.log({ url })
+      console.log({ response })
+      projectData = {
+        zip,
+        feeling,
+        temp: response.main.temp,
+        icon: response.weather[0].icon,
+        city: response.name,
+        country: response.sys.country,
+        date: Date.now(),
+      }
+
+      res.send({ status: 'success' })
+    })
+    .catch((error) => console.log(error))
+}
+
+app.get('/updateData', updateData)
+
+function updateData(req, res) {
   res.send(projectData)
 }
 
-app.post('/addData', addData)
-
-function addData(req, res) {
-  let data = req.body
-  projectData['date'] = data.date
-  projectData['temp'] = data.temp
-  projectData['feelings'] = data.feelings
-
-  res.send(projectData)
-}
+app.listen(8000, () => {
+  console.log('server is running on port 8000.')
+})
